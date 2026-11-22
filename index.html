@@ -1,0 +1,717 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pendidikan Pancasila (Bab 3) • PKBM Tunas Ilmu</title>
+
+    <!-- Google Fonts: Plus Jakarta Sans (fallback ke Calibri & system-ui) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Konfigurasi Warna Tema Merah Marun & Aksen Emas Lembut -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'Calibri', 'system-ui', '-apple-system', 'sans-serif'],
+                    },
+                    colors: {
+                        maroon: {
+                            DEFAULT: '#8B1E3F',
+                            dark: '#6B152F',
+                            light: '#A8284E',
+                            soft: '#FDF2F5',
+                            border: '#EFCAD5',
+                        },
+                        gold: {
+                            DEFAULT: '#D97706',
+                            soft: '#FEF3C7',
+                            border: '#FDE68A',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Pengaturan dasar agar nyaman dibaca di layar HP maupun laptop */
+        body {
+            font-family: "Plus Jakarta Sans", Calibri, system-ui, -apple-system, sans-serif;
+            background-color: #F8FAFC;
+            color: #1E293B;
+        }
+
+        /* Skala ukuran teks dinamis (A- / A / A+) untuk tabel & kartu materi */
+        .text-scale-sm .readable-area {
+            font-size: 14px;
+            line-height: 1.65;
+        }
+        .text-scale-md .readable-area {
+            font-size: 16px;
+            line-height: 1.75;
+        }
+        .text-scale-lg .readable-area {
+            font-size: 19px;
+            line-height: 1.85;
+        }
+
+        /* Pengaturan khusus Cetak / Simpan PDF (Kertas A4 Rapi) */
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 14mm 12mm;
+            }
+
+            body {
+                background-color: #FFFFFF !important;
+                color: #0F172A !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            /* Sembunyikan toolbar, tombol interaktif, dan footer saat dicetak */
+            .no-print {
+                display: none !important;
+            }
+
+            /* Hindari kartu materi atau baris tabel terpotong di tengah halaman */
+            .material-card,
+            .header-banner,
+            tr {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+
+            /* Mulai Bagian B (Materi Singkat) di halaman baru agar lebih rapi */
+            #section-materi {
+                page-break-before: always;
+                break-before: page;
+                margin-top: 0 !important;
+            }
+
+            .shadow-sm, .shadow-md, .shadow-lg {
+                box-shadow: none !important;
+            }
+
+            .readable-area {
+                font-size: 12pt !important;
+                line-height: 1.55 !important;
+            }
+
+            .print-container {
+                max-width: 100% !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+        }
+    </style>
+</head>
+<body class="text-scale-md antialiased selection:bg-maroon-soft selection:text-maroon">
+
+    <!-- ==================== 1. HEADER BANNER ==================== -->
+    <header class="header-banner bg-gradient-to-br from-maroon-dark via-maroon to-[#A6264C] text-white shadow-md">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 py-7 sm:py-9">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div>
+                    <!-- Label Kecil -->
+                    <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs sm:text-sm font-bold tracking-wide bg-white/15 text-amber-200 border border-amber-300/30 mb-3">
+                        <svg class="w-4 h-4 text-amber-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                        PKBM TUNAS ILMU &bull; KELAS VI SEMESTER 1
+                    </span>
+
+                    <!-- Judul Utama -->
+                    <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight leading-tight">
+                        PENDIDIKAN PANCASILA (BAB 3)
+                    </h1>
+
+                    <!-- Subjudul -->
+                    <p class="mt-2 text-sm sm:text-base text-rose-100 font-medium">
+                        Kisi-Kisi Ulangan Harian &amp; Materi Singkat Siap Belajar
+                    </p>
+                </div>
+
+                <!-- Badge Topik Bab -->
+                <div class="self-start sm:self-center bg-white/10 border border-white/20 rounded-2xl px-4 py-3 text-left sm:text-right">
+                    <p class="text-xs uppercase tracking-wider text-amber-200 font-semibold">Fokus Pembahasan</p>
+                    <p class="text-base sm:text-lg font-bold text-white mt-0.5">Musyawarah &amp; Sila Ke-4</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== 2. TOOLBAR STICKY ==================== -->
+    <div class="no-print sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 py-3">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+
+                <!-- Kiri: Indikator Progres Belajar + Progress Bar -->
+                <div class="flex-1 max-w-md">
+                    <div class="flex items-center justify-between text-xs sm:text-sm font-bold mb-1.5">
+                        <span class="text-slate-700 flex items-center gap-1.5">
+                            <span class="w-2.5 h-2.5 rounded-full bg-gold inline-block"></span>
+                            Progres Belajar Murid
+                        </span>
+                        <span id="progress-label" class="text-maroon">0/4 Materi Dipahami</span>
+                    </div>
+                    <div class="w-full h-2.5 bg-slate-200 rounded-full overflow-hidden">
+                        <div
+                            id="progress-bar"
+                            class="h-full bg-gradient-to-r from-maroon to-gold rounded-full transition-all duration-500"
+                            style="width: 0%;"
+                        ></div>
+                    </div>
+                </div>
+
+                <!-- Kanan: Pengatur Ukuran Teks & Tombol Cetak -->
+                <div class="flex items-center justify-between sm:justify-end gap-3 pt-1 md:pt-0 border-t md:border-t-0 border-slate-100">
+                    <!-- Pengatur Ukuran Teks (A- / A / A+) -->
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs sm:text-sm font-medium text-slate-500 hidden sm:inline">Ukuran Teks:</span>
+                        <div class="inline-flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200" role="group" aria-label="Pengatur ukuran teks">
+                            <button
+                                id="font-btn-sm"
+                                type="button"
+                                onclick="setFontSize('sm')"
+                                class="px-3 py-1.5 rounded-lg text-xs font-bold text-slate-600 hover:text-maroon transition cursor-pointer"
+                                title="Perkecil ukuran teks"
+                            >A-</button>
+                            <button
+                                id="font-btn-md"
+                                type="button"
+                                onclick="setFontSize('md')"
+                                class="px-3 py-1.5 rounded-lg text-sm font-bold bg-white text-maroon shadow-sm transition cursor-pointer"
+                                title="Ukuran teks normal (16px)"
+                            >A</button>
+                            <button
+                                id="font-btn-lg"
+                                type="button"
+                                onclick="setFontSize('lg')"
+                                class="px-3 py-1.5 rounded-lg text-base font-bold text-slate-600 hover:text-maroon transition cursor-pointer"
+                                title="Perbesar ukuran teks"
+                            >A+</button>
+                        </div>
+                    </div>
+
+                    <!-- Tombol Cetak / Simpan PDF -->
+                    <button
+                        type="button"
+                        onclick="window.print()"
+                        class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-maroon text-white hover:bg-maroon-dark active:scale-[0.98] font-bold text-xs sm:text-sm shadow-sm transition cursor-pointer"
+                        title="Cetak atau simpan halaman ini sebagai PDF"
+                    >
+                        <svg class="w-4 h-4 text-amber-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
+                        </svg>
+                        <span>Cetak / Simpan PDF</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== KONTEN UTAMA ==================== -->
+    <main class="print-container max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-10">
+
+        <!-- ================================================================ -->
+        <!-- BAGIAN A: KISI-KISI ULANGAN HARIAN PENDIDIKAN PANCASILA (15 SOAL)-->
+        <!-- ================================================================ -->
+        <section id="section-kisi-kisi" class="bg-white rounded-2xl border border-maroon-border shadow-sm overflow-hidden">
+            <div class="bg-maroon-soft px-5 sm:px-6 py-4 border-b border-maroon-border flex items-center justify-between flex-wrap gap-2">
+                <h2 class="text-lg sm:text-xl font-extrabold text-maroon flex items-center gap-2.5">
+                    <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-maroon text-white text-sm font-extrabold shadow-sm">A</span>
+                    Kisi-Kisi Ulangan Harian Pendidikan Pancasila
+                </h2>
+                <span class="text-xs sm:text-sm font-bold text-maroon bg-white px-3.5 py-1 rounded-full border border-maroon-border">
+                    15 Soal
+                </span>
+            </div>
+
+            <!-- Tabel Responsif dengan Scroll Horizontal Rapi di HP -->
+            <div class="overflow-x-auto readable-area">
+                <table class="w-full text-left border-collapse min-w-[640px]">
+                    <thead>
+                        <tr class="bg-maroon text-white text-sm">
+                            <th class="py-3.5 px-4 font-bold text-center w-14">No.</th>
+                            <th class="py-3.5 px-4 font-bold w-60">Materi / Topik</th>
+                            <th class="py-3.5 px-4 font-bold">Yang Perlu Dipelajari</th>
+                            <th class="py-3.5 px-4 font-bold w-48">Bentuk Soal</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200">
+                        <tr class="hover:bg-maroon-soft/40 transition">
+                            <td class="py-3.5 px-4 text-center font-extrabold text-maroon">1</td>
+                            <td class="py-3.5 px-4 font-semibold text-slate-800">Adab Musyawarah (Pemilihan Ketua RT)</td>
+                            <td class="py-3.5 px-4 text-slate-700">Menentukan sikap baik (adab musyawarah) saat tidak terpilih.</td>
+                            <td class="py-3.5 px-4"><span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-800">Pilihan Ganda</span></td>
+                        </tr>
+                        <tr class="bg-slate-50/70 hover:bg-maroon-soft/40 transition">
+                            <td class="py-3.5 px-4 text-center font-extrabold text-maroon">2</td>
+                            <td class="py-3.5 px-4 font-semibold text-slate-800">Adab Musyawarah (Pemilihan Ketua RT)</td>
+                            <td class="py-3.5 px-4 text-slate-700">Mengidentifikasi sikap yang melanggar aturan dan adab musyawarah.</td>
+                            <td class="py-3.5 px-4"><span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-purple-100 text-purple-800">PG Kompleks (2 jawaban)</span></td>
+                        </tr>
+                        <tr class="hover:bg-maroon-soft/40 transition">
+                            <td class="py-3.5 px-4 text-center font-extrabold text-maroon">3</td>
+                            <td class="py-3.5 px-4 font-semibold text-slate-800">Adab Musyawarah (Pemilihan Ketua RT)</td>
+                            <td class="py-3.5 px-4 text-slate-700">Menilai sikap menghargai orang yang berbicara dan tidak memaksakan kehendak.</td>
+                            <td class="py-3.5 px-4"><span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-800">Benar / Salah</span></td>
+                        </tr>
+                        <tr class="bg-slate-50/70 hover:bg-maroon-soft/40 transition">
+                            <td class="py-3.5 px-4 text-center font-extrabold text-maroon">4</td>
+                            <td class="py-3.5 px-4 font-semibold text-slate-800">Pengambilan Keputusan</td>
+                            <td class="py-3.5 px-4 text-slate-700">Menentukan cara pengambilan keputusan jika mufakat sulit tercapai (voting).</td>
+                            <td class="py-3.5 px-4"><span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-800">Pilihan Ganda</span></td>
+                        </tr>
+                        <tr class="hover:bg-maroon-soft/40 transition">
+                            <td class="py-3.5 px-4 text-center font-extrabold text-maroon">5</td>
+                            <td class="py-3.5 px-4 font-semibold text-slate-800">Keputusan Bersama (Diskusi Study Tour)</td>
+                            <td class="py-3.5 px-4 text-slate-700">Menentukan contoh sikap mengikuti hasil keputusan bersama meski berbeda pilihan.</td>
+                            <td class="py-3.5 px-4"><span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-800">Pilihan Ganda</span></td>
+                        </tr>
+                        <tr class="bg-slate-50/70 hover:bg-maroon-soft/40 transition">
+                            <td class="py-3.5 px-4 text-center font-extrabold text-maroon">6</td>
+                            <td class="py-3.5 px-4 font-semibold text-slate-800">Keputusan Bersama (Diskusi Study Tour)</td>
+                            <td class="py-3.5 px-4 text-slate-700">Memahami tujuan pemimpin memberi kesempatan berbicara kepada setiap anggota.</td>
+                            <td class="py-3.5 px-4"><span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-purple-100 text-purple-800">PG Kompleks (2 jawaban)</span></td>
+                        </tr>
+                        <tr class="hover:bg-maroon-soft/40 transition">
+                            <td class="py-3.5 px-4 text-center font-extrabold text-maroon">7</td>
+                            <td class="py-3.5 px-4 font-semibold text-slate-800">Keputusan Bersama (Diskusi Study Tour)</td>
+                            <td class="py-3.5 px-4 text-slate-700">Memahami kewenangan ketua dan kewajiban menaati hasil musyawarah dengan ikhlas.</td>
+                            <td class="py-3.5 px-4"><span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-800">Benar / Salah</span></td>
+                        </tr>
+                        <tr class="bg-slate-50/70 hover:bg-maroon-soft/40 transition">
+                            <td class="py-3.5 px-4 text-center font-extrabold text-maroon">8</td>
+                            <td class="py-3.5 px-4 font-semibold text-slate-800">Istilah Musyawarah</td>
+                            <td class="py-3.5 px-4 text-slate-700">Memasangkan istilah musyawarah (Pendapat, Lapang Dada, Mufakat) dengan artinya.</td>
+                            <td class="py-3.5 px-4"><span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800">Menjodohkan</span></td>
+                        </tr>
+                        <tr class="hover:bg-maroon-soft/40 transition">
+                            <td class="py-3.5 px-4 text-center font-extrabold text-maroon">9</td>
+                            <td class="py-3.5 px-4 font-semibold text-slate-800">Penerapan Sila Pancasila (Kerja Bakti)</td>
+                            <td class="py-3.5 px-4 text-slate-700">Menentukan sila Pancasila yang tercermin dari kegiatan berdiskusi/musyawarah.</td>
+                            <td class="py-3.5 px-4"><span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-800">Pilihan Ganda</span></td>
+                        </tr>
+                        <tr class="bg-slate-50/70 hover:bg-maroon-soft/40 transition">
+                            <td class="py-3.5 px-4 text-center font-extrabold text-maroon">10</td>
+                            <td class="py-3.5 px-4 font-semibold text-slate-800">Penerapan Sila Pancasila (Kerja Bakti)</td>
+                            <td class="py-3.5 px-4 text-slate-700">Menilai sikap mencari solusi adil dibandingkan bertengkar saat membagi tugas.</td>
+                            <td class="py-3.5 px-4"><span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-800">Benar / Salah</span></td>
+                        </tr>
+                        <tr class="hover:bg-maroon-soft/40 transition">
+                            <td class="py-3.5 px-4 text-center font-extrabold text-maroon">11</td>
+                            <td class="py-3.5 px-4 font-semibold text-slate-800">Akibat Tidak Bermusyawarah</td>
+                            <td class="py-3.5 px-4 text-slate-700">Memprediksi akibat yang terjadi jika kelompok tidak bermusyawarah.</td>
+                            <td class="py-3.5 px-4"><span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-800">Pilihan Ganda</span></td>
+                        </tr>
+                        <tr class="bg-slate-50/70 hover:bg-maroon-soft/40 transition">
+                            <td class="py-3.5 px-4 text-center font-extrabold text-maroon">12</td>
+                            <td class="py-3.5 px-4 font-semibold text-slate-800">Manfaat Musyawarah</td>
+                            <td class="py-3.5 px-4 text-slate-700">Mengidentifikasi manfaat pembagian tugas melalui musyawarah.</td>
+                            <td class="py-3.5 px-4"><span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-purple-100 text-purple-800">PG Kompleks (2 jawaban)</span></td>
+                        </tr>
+                        <tr class="hover:bg-maroon-soft/40 transition">
+                            <td class="py-3.5 px-4 text-center font-extrabold text-maroon">13</td>
+                            <td class="py-3.5 px-4 font-semibold text-slate-800">Musyawarah yang Baik (Rapat Panitia)</td>
+                            <td class="py-3.5 px-4 text-slate-700">Menentukan sikap pemimpin yang menerima dan memuji usulan anggota.</td>
+                            <td class="py-3.5 px-4"><span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-800">Pilihan Ganda</span></td>
+                        </tr>
+                        <tr class="bg-slate-50/70 hover:bg-maroon-soft/40 transition">
+                            <td class="py-3.5 px-4 text-center font-extrabold text-maroon">14</td>
+                            <td class="py-3.5 px-4 font-semibold text-slate-800">Ciri Musyawarah Sesuai Pancasila</td>
+                            <td class="py-3.5 px-4 text-slate-700">Mengidentifikasi ciri-ciri musyawarah yang baik dan sesuai nilai Pancasila.</td>
+                            <td class="py-3.5 px-4"><span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-purple-100 text-purple-800">PG Kompleks (2 jawaban)</span></td>
+                        </tr>
+                        <tr class="hover:bg-maroon-soft/40 transition">
+                            <td class="py-3.5 px-4 text-center font-extrabold text-maroon">15</td>
+                            <td class="py-3.5 px-4 font-semibold text-slate-800">Nilai Pancasila dalam Musyawarah</td>
+                            <td class="py-3.5 px-4 text-slate-700">Memasangkan sikap tokoh dalam rapat dengan nilai Pancasila yang terkandung.</td>
+                            <td class="py-3.5 px-4"><span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800">Menjodohkan</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ================================================================ -->
+        <!-- BAGIAN B: MATERI SINGKAT PENDIDIKAN PANCASILA (4 KARTU BELAJAR)  -->
+        <!-- ================================================================ -->
+        <section id="section-materi" class="space-y-5">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+                <h2 class="text-lg sm:text-xl font-extrabold text-maroon flex items-center gap-2.5">
+                    <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-maroon text-white text-sm font-extrabold shadow-sm">B</span>
+                    Materi Singkat Pendidikan Pancasila (Bekal Mengerjakan UH)
+                </h2>
+                <span class="no-print text-xs sm:text-sm text-slate-500 font-medium">
+                    Klik tombol <strong>Sudah Dipahami</strong> di setiap kartu setelah selesai membaca
+                </span>
+            </div>
+
+            <!-- KARTU 1: Adab Musyawarah & Voting -->
+            <article id="card-1" class="material-card bg-white rounded-2xl border border-maroon-border border-l-4 border-l-maroon shadow-sm overflow-hidden transition-all">
+                <div class="bg-maroon-soft/80 px-5 sm:px-6 py-4 border-b border-maroon-border flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                    <div class="flex items-center gap-2.5">
+                        <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-gold-soft text-gold font-extrabold text-sm border border-gold-border">1</span>
+                        <h3 class="text-lg font-extrabold text-maroon">Adab Musyawarah &amp; Voting</h3>
+                    </div>
+                    <button
+                        type="button"
+                        id="btn-card-1"
+                        onclick="toggleCard('card-1')"
+                        class="no-print self-start sm:self-auto inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold border-2 border-maroon/30 bg-white text-maroon hover:bg-maroon hover:text-white transition cursor-pointer"
+                    >
+                        <span class="check-icon w-5 h-5 rounded-full border-2 border-current flex items-center justify-center"></span>
+                        <span class="btn-label">Sudah Dipahami</span>
+                    </button>
+                </div>
+                <div class="p-5 sm:p-6 readable-area text-slate-700">
+                    <ul class="space-y-3.5 list-disc pl-5 marker:text-maroon">
+                        <li>
+                            <strong class="text-slate-900">Adab saat orang lain berbicara:</strong> Wajib mendengarkan dengan tenang dan menghargai pembicara. <strong class="text-maroon bg-maroon-soft px-1.5 py-0.5 rounded">Mengobrol sendiri</strong> dan <strong class="text-maroon bg-maroon-soft px-1.5 py-0.5 rounded">tidak mendengarkan pendapat orang lain</strong> adalah sikap yang melanggar adab musyawarah.
+                        </li>
+                        <li>
+                            <strong class="text-slate-900">Sikap saat kalah / tidak terpilih:</strong> Menerima hasil keputusan dengan <strong class="text-maroon bg-maroon-soft px-1.5 py-0.5 rounded">lapang dada</strong> (ikhlas, tidak marah, memberi selamat kepada yang terpilih, dan tidak memaksakan kehendak).
+                        </li>
+                        <li>
+                            <strong class="text-slate-900">Voting (Suara Terbanyak):</strong> Cara pengambilan keputusan dengan pemungutan suara apabila <strong class="text-maroon bg-maroon-soft px-1.5 py-0.5 rounded">mufakat</strong> (kesepakatan bulat) sulit tercapai.
+                        </li>
+                    </ul>
+                </div>
+            </article>
+
+            <!-- KARTU 2: Keputusan Bersama & Istilah Penting -->
+            <article id="card-2" class="material-card bg-white rounded-2xl border border-maroon-border border-l-4 border-l-maroon shadow-sm overflow-hidden transition-all">
+                <div class="bg-maroon-soft/80 px-5 sm:px-6 py-4 border-b border-maroon-border flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                    <div class="flex items-center gap-2.5">
+                        <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-gold-soft text-gold font-extrabold text-sm border border-gold-border">2</span>
+                        <h3 class="text-lg font-extrabold text-maroon">Keputusan Bersama &amp; Istilah Penting</h3>
+                    </div>
+                    <button
+                        type="button"
+                        id="btn-card-2"
+                        onclick="toggleCard('card-2')"
+                        class="no-print self-start sm:self-auto inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold border-2 border-maroon/30 bg-white text-maroon hover:bg-maroon hover:text-white transition cursor-pointer"
+                    >
+                        <span class="check-icon w-5 h-5 rounded-full border-2 border-current flex items-center justify-center"></span>
+                        <span class="btn-label">Sudah Dipahami</span>
+                    </button>
+                </div>
+                <div class="p-5 sm:p-6 readable-area text-slate-700">
+                    <ul class="space-y-3.5 list-disc pl-5 marker:text-maroon">
+                        <li>
+                            <strong class="text-slate-900">Mengutamakan Kepentingan Bersama:</strong> Tetap setuju dan menaati hasil keputusan bersama dengan ikhlas, meskipun pilihan pribadi kita awalnya berbeda.
+                        </li>
+                        <li>
+                            <strong class="text-slate-900">Tugas Pemimpin Musyawarah:</strong> Tidak boleh memutuskan sendiri. Pemimpin memberi kesempatan kepada semua anggota untuk berbicara sebagai wujud <strong class="text-maroon bg-maroon-soft px-1.5 py-0.5 rounded">menghargai pendapat</strong> dan untuk <strong class="text-maroon bg-maroon-soft px-1.5 py-0.5 rounded">mencari kesepakatan bersama (mufakat) yang adil</strong>.
+                        </li>
+                        <li>
+                            <strong class="text-slate-900">Arti Istilah Penting:</strong>
+                            <div class="mt-2.5 grid grid-cols-1 md:grid-cols-3 gap-3">
+                                <div class="bg-amber-50/60 border border-gold-border rounded-xl p-3.5">
+                                    <p class="font-extrabold text-maroon mb-1">Pendapat</p>
+                                    <p class="text-slate-700">Ide, gagasan, atau usulan yang disampaikan oleh peserta musyawarah.</p>
+                                </div>
+                                <div class="bg-amber-50/60 border border-gold-border rounded-xl p-3.5">
+                                    <p class="font-extrabold text-maroon mb-1">Lapang Dada</p>
+                                    <p class="text-slate-700">Sikap menerima hasil keputusan dengan ikhlas dan tidak marah.</p>
+                                </div>
+                                <div class="bg-amber-50/60 border border-gold-border rounded-xl p-3.5">
+                                    <p class="font-extrabold text-maroon mb-1">Mufakat</p>
+                                    <p class="text-slate-700">Kesepakatan bulat yang diterima oleh semua pihak setelah berdiskusi.</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </article>
+
+            <!-- KARTU 3: Musyawarah Sila Ke-4 & Manfaatnya -->
+            <article id="card-3" class="material-card bg-white rounded-2xl border border-maroon-border border-l-4 border-l-maroon shadow-sm overflow-hidden transition-all">
+                <div class="bg-maroon-soft/80 px-5 sm:px-6 py-4 border-b border-maroon-border flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                    <div class="flex items-center gap-2.5">
+                        <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-gold-soft text-gold font-extrabold text-sm border border-gold-border">3</span>
+                        <h3 class="text-lg font-extrabold text-maroon">Musyawarah Sila Ke-4 &amp; Manfaatnya</h3>
+                    </div>
+                    <button
+                        type="button"
+                        id="btn-card-3"
+                        onclick="toggleCard('card-3')"
+                        class="no-print self-start sm:self-auto inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold border-2 border-maroon/30 bg-white text-maroon hover:bg-maroon hover:text-white transition cursor-pointer"
+                    >
+                        <span class="check-icon w-5 h-5 rounded-full border-2 border-current flex items-center justify-center"></span>
+                        <span class="btn-label">Sudah Dipahami</span>
+                    </button>
+                </div>
+                <div class="p-5 sm:p-6 readable-area text-slate-700">
+                    <ul class="space-y-3.5 list-disc pl-5 marker:text-maroon">
+                        <li>
+                            <strong class="text-slate-900">Penerapan Sila Ke-4 Pancasila:</strong> Berdiskusi untuk membagi tugas secara adil dan mencari solusi (jalan keluar) terbaik bagi semua anggota kelompok.
+                        </li>
+                        <li>
+                            <strong class="text-slate-900">Manfaat Musyawarah:</strong> Tugas dapat diselesaikan dengan <strong class="text-maroon bg-maroon-soft px-1.5 py-0.5 rounded">rukun dan damai</strong>, serta <strong class="text-maroon bg-maroon-soft px-1.5 py-0.5 rounded">semua orang merasa dihargai dan mendapat keadilan</strong>.
+                        </li>
+                        <li>
+                            <strong class="text-slate-900">Akibat Tidak Bermusyawarah:</strong> Dapat menimbulkan <strong class="text-maroon bg-maroon-soft px-1.5 py-0.5 rounded">pertengkaran</strong> dan membuat <strong class="text-maroon bg-maroon-soft px-1.5 py-0.5 rounded">tugas tidak selesai</strong>.
+                        </li>
+                    </ul>
+                </div>
+            </article>
+
+            <!-- KARTU 4: Ciri Musyawarah yang Baik & Nilai Pancasila -->
+            <article id="card-4" class="material-card bg-white rounded-2xl border border-maroon-border border-l-4 border-l-maroon shadow-sm overflow-hidden transition-all">
+                <div class="bg-maroon-soft/80 px-5 sm:px-6 py-4 border-b border-maroon-border flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                    <div class="flex items-center gap-2.5">
+                        <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-gold-soft text-gold font-extrabold text-sm border border-gold-border">4</span>
+                        <h3 class="text-lg font-extrabold text-maroon">Ciri Musyawarah yang Baik &amp; Nilai Pancasila</h3>
+                    </div>
+                    <button
+                        type="button"
+                        id="btn-card-4"
+                        onclick="toggleCard('card-4')"
+                        class="no-print self-start sm:self-auto inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold border-2 border-maroon/30 bg-white text-maroon hover:bg-maroon hover:text-white transition cursor-pointer"
+                    >
+                        <span class="check-icon w-5 h-5 rounded-full border-2 border-current flex items-center justify-center"></span>
+                        <span class="btn-label">Sudah Dipahami</span>
+                    </button>
+                </div>
+                <div class="p-5 sm:p-6 readable-area text-slate-700">
+                    <ul class="space-y-3.5 list-disc pl-5 marker:text-maroon">
+                        <li>
+                            <strong class="text-slate-900">Ciri Musyawarah Sesuai Pancasila:</strong> Keputusan diambil untuk <strong class="text-maroon bg-maroon-soft px-1.5 py-0.5 rounded">kebaikan bersama</strong> dan mengakomodasi kebutuhan banyak orang, serta <strong class="text-maroon bg-maroon-soft px-1.5 py-0.5 rounded">setiap orang berhak menyampaikan pendapat/usulannya</strong> (tidak hanya ketua).
+                        </li>
+                        <li>
+                            <strong class="text-slate-900">Contoh Sikap &amp; Nilai Pancasila:</strong>
+                            <div class="mt-2.5 space-y-2.5">
+                                <div class="bg-slate-50 border border-slate-200 rounded-xl px-4 py-3">
+                                    <strong class="text-maroon">Mengangkat tangan sebelum berbicara</strong> &rarr; Menjaga sopan santun (adab) saat ingin menyampaikan pendapat.
+                                </div>
+                                <div class="bg-slate-50 border border-slate-200 rounded-xl px-4 py-3">
+                                    <strong class="text-maroon">Ketua mendengarkan dan menerima ide anggota</strong> &rarr; Sikap pemimpin yang bijaksana dalam menghargai gagasan anggotanya.
+                                </div>
+                                <div class="bg-slate-50 border border-slate-200 rounded-xl px-4 py-3">
+                                    <strong class="text-maroon">Mengadakan lomba untuk semua kalangan fisik</strong> &rarr; Mengutamakan keadilan bagi seluruh anak agar bisa ikut serta.
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <!-- ==================== FOOTER & RESET PROGRES ==================== -->
+    <footer class="no-print max-w-5xl mx-auto px-4 sm:px-6 pb-10 pt-2">
+        <div class="bg-white rounded-2xl border border-slate-200 p-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+            <div>
+                <p class="text-sm font-bold text-slate-800">Semangat Belajar, Murid Hebat PKBM Tunas Ilmu!</p>
+                <p class="text-xs text-slate-500 mt-0.5">Progres belajar otomatis tersimpan di perangkat ini.</p>
+            </div>
+            <button
+                type="button"
+                onclick="resetProgress()"
+                class="px-4 py-2 rounded-xl text-xs font-bold text-slate-600 bg-slate-100 hover:bg-rose-50 hover:text-maroon border border-slate-200 transition cursor-pointer"
+            >
+                Ulangi Checklist Belajar
+            </button>
+        </div>
+    </footer>
+
+    <!-- ==================== NOTIFIKASI TOAST (PENGGANTI ALERT) ==================== -->
+    <div
+        id="toast-box"
+        class="no-print fixed bottom-5 right-5 z-50 max-w-xs bg-slate-900 text-white px-4 py-3 rounded-xl shadow-lg text-sm font-semibold flex items-center gap-2.5 opacity-0 pointer-events-none translate-y-3 transition-all duration-300"
+        role="status"
+        aria-live="polite"
+    >
+        <span class="text-amber-400 text-lg leading-none">&#10003;</span>
+        <span id="toast-message"></span>
+    </div>
+
+    <!-- ==================== SCRIPT INTERAKTIVITAS ==================== -->
+    <script>
+        // Kunci penyimpanan lokal khusus Pendidikan Pancasila Bab 3
+        const PROGRESS_KEY = 'pancasila_bab3_progress';
+        const FONT_KEY = 'pancasila_bab3_fontsize';
+        const CARD_IDS = ['card-1', 'card-2', 'card-3', 'card-4'];
+
+        let completedCards = {};
+        let toastTimer = null;
+
+        /**
+         * Memuat progres belajar dan preferensi ukuran teks dari localStorage
+         */
+        function loadSavedState() {
+            try {
+                const savedProgress = localStorage.getItem(PROGRESS_KEY);
+                if (savedProgress) {
+                    completedCards = JSON.parse(savedProgress) || {};
+                }
+                const savedFont = localStorage.getItem(FONT_KEY);
+                if (savedFont && ['sm', 'md', 'lg'].includes(savedFont)) {
+                    setFontSize(savedFont, false);
+                }
+            } catch (error) {
+                console.warn('localStorage tidak tersedia:', error);
+                completedCards = {};
+            }
+        }
+
+        /**
+         * Menyimpan progres belajar ke localStorage
+         */
+        function saveProgress() {
+            try {
+                localStorage.setItem(PROGRESS_KEY, JSON.stringify(completedCards));
+            } catch (error) {
+                console.warn('Gagal menyimpan progres:', error);
+            }
+        }
+
+        /**
+         * Mengubah ukuran teks isi tabel dan kartu materi secara dinamis (A- / A / A+)
+         * @param {'sm'|'md'|'lg'} size
+         * @param {boolean} persist
+         */
+        function setFontSize(size, persist = true) {
+            document.body.classList.remove('text-scale-sm', 'text-scale-md', 'text-scale-lg');
+            document.body.classList.add(`text-scale-${size}`);
+
+            ['sm', 'md', 'lg'].forEach((s) => {
+                const btn = document.getElementById(`font-btn-${s}`);
+                if (!btn) return;
+                if (s === size) {
+                    btn.classList.add('bg-white', 'text-maroon', 'shadow-sm');
+                    btn.classList.remove('text-slate-600');
+                } else {
+                    btn.classList.remove('bg-white', 'text-maroon', 'shadow-sm');
+                    btn.classList.add('text-slate-600');
+                }
+            });
+
+            if (persist) {
+                try {
+                    localStorage.setItem(FONT_KEY, size);
+                } catch (e) {
+                    // Abaikan jika penyimpanan lokal dibatasi
+                }
+            }
+        }
+
+        /**
+         * Menandai atau membatalkan tanda "Sudah Dipahami" pada sebuah kartu materi
+         * @param {string} cardId
+         */
+        function toggleCard(cardId) {
+            const isNowDone = !completedCards[cardId];
+            completedCards[cardId] = isNowDone;
+
+            saveProgress();
+            renderCardUI(cardId);
+            updateProgressBar();
+
+            const doneCount = CARD_IDS.filter((id) => completedCards[id]).length;
+            if (isNowDone && doneCount === CARD_IDS.length) {
+                showToast('Hebat! Semua 4 materi Pendidikan Pancasila sudah dipahami!');
+            }
+        }
+
+        /**
+         * Memperbarui tampilan kartu dan tombol centang berdasarkan status belajar
+         * @param {string} cardId
+         */
+        function renderCardUI(cardId) {
+            const cardEl = document.getElementById(cardId);
+            const btnEl = document.getElementById(`btn-${cardId}`);
+            if (!cardEl || !btnEl) return;
+
+            const isDone = Boolean(completedCards[cardId]);
+            const iconEl = btnEl.querySelector('.check-icon');
+            const labelEl = btnEl.querySelector('.btn-label');
+
+            if (isDone) {
+                cardEl.classList.add('ring-2', 'ring-emerald-400', 'border-l-emerald-600');
+                cardEl.classList.remove('border-l-maroon');
+
+                btnEl.className = 'no-print self-start sm:self-auto inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold border-2 border-emerald-600 bg-emerald-600 text-white hover:bg-emerald-700 transition cursor-pointer shadow-sm';
+                iconEl.innerHTML = '<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>';
+                labelEl.textContent = 'Sudah Dipahami ✓';
+            } else {
+                cardEl.classList.remove('ring-2', 'ring-emerald-400', 'border-l-emerald-600');
+                cardEl.classList.add('border-l-maroon');
+
+                btnEl.className = 'no-print self-start sm:self-auto inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold border-2 border-maroon/30 bg-white text-maroon hover:bg-maroon hover:text-white transition cursor-pointer';
+                iconEl.innerHTML = '';
+                labelEl.textContent = 'Sudah Dipahami';
+            }
+        }
+
+        /**
+         * Memperbarui teks dan lebar visual progress bar pada toolbar
+         */
+        function updateProgressBar() {
+            const total = CARD_IDS.length;
+            const done = CARD_IDS.filter((id) => completedCards[id]).length;
+            const percent = Math.round((done / total) * 100);
+
+            const labelEl = document.getElementById('progress-label');
+            const barEl = document.getElementById('progress-bar');
+
+            if (labelEl) {
+                labelEl.textContent = `${done}/${total} Materi Dipahami`;
+            }
+            if (barEl) {
+                barEl.style.width = `${percent}%`;
+            }
+        }
+
+        /**
+         * Mengatur ulang seluruh checklist belajar
+         */
+        function resetProgress() {
+            completedCards = {};
+            saveProgress();
+            CARD_IDS.forEach(renderCardUI);
+            updateProgressBar();
+            showToast('Checklist belajar telah diulang.');
+        }
+
+        /**
+         * Menampilkan notifikasi toast singkat tanpa menggunakan alert()
+         * @param {string} message
+         */
+        function showToast(message) {
+            const toast = document.getElementById('toast-box');
+            const msgEl = document.getElementById('toast-message');
+            if (!toast || !msgEl) return;
+
+            msgEl.textContent = message;
+            toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-3');
+            toast.classList.add('opacity-100', 'translate-y-0');
+
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => {
+                toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-3');
+                toast.classList.remove('opacity-100', 'translate-y-0');
+            }, 3000);
+        }
+
+        // Inisialisasi aplikasi saat halaman selesai dimuat
+        window.addEventListener('DOMContentLoaded', () => {
+            loadSavedState();
+            CARD_IDS.forEach(renderCardUI);
+            updateProgressBar();
+        });
+    </script>
+</body>
+</html>
+```
